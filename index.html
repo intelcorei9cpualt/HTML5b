@@ -15,11 +15,54 @@
 	<link rel="shortcut icon" type="image/x-icon" href="./visuals/blocks/b0001.svg" />
 	<link rel="stylesheet" href="style.css" type="text/css"/>
 	<script type="text/javascript" src="5b.js"></script>
+	<style>
+		#musicToggle {
+			position: fixed;
+			right: 18px;
+			top: 18px;
+			z-index: 10;
+			padding: 10px 14px;
+			border: 1px solid #999;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.9);
+			color: #333;
+			font-size: 14px;
+			font-weight: 700;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body style="overflow:hidden;">
+<button id="musicToggle" type="button">Music: Off</button>
 <div id="center">
 	<div id="hide-contenteditable"><canvas width="960" height="540" id="cnv" contenteditable="false"></canvas></div>
 	<p class="bottomtext">An HTML5 port of Cary Huang's <a href="https://bfdi.tv/5b/">BFDIA 5b</a>. Explore is powered by <a href="https://5beam.zelo.dev/">Zelo101's 5beam</a>.</p>
 </div>
+<script>
+	const bgMusic = new Audio('https://raw.githubusercontent.com/intelcorei9cpualt/HTML5b/master/data/the%20fiber%2016x%20loop.wav');
+	bgMusic.loop = true;
+	bgMusic.volume = 0.35;
+	bgMusic.preload = 'auto';
+
+	let musicEnabled = false;
+	const musicToggle = document.getElementById('musicToggle');
+
+	musicToggle.addEventListener('click', async () => {
+		try {
+			if (musicEnabled) {
+				bgMusic.pause();
+				bgMusic.currentTime = 0;
+				musicEnabled = false;
+				musicToggle.textContent = 'Music: Off';
+			} else {
+				await bgMusic.play();
+				musicEnabled = true;
+				musicToggle.textContent = 'Music: On';
+			}
+		} catch (error) {
+			console.error('Music toggle failed:', error);
+		}
+	});
+</script>
 </body>
 </html>
