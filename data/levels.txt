@@ -1767,6 +1767,7 @@ New level
 02,01.00,15.00,10
 00
 000000
+99S Yup! Hi there! This is a brand new level!
 02,01.00,15.00,10
 00
 000000
